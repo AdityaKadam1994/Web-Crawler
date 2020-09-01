@@ -1,0 +1,45 @@
+:root {
+    --main-bg-color: #7f7fd5;
+    --main-bg-secondary-color: #86a8e7;
+    --main-bg-third-color: #91eae4;
+    --font-style: 'Poppins', sans-serif;
+    --body-text-color: #fff;
+    --form-border: #fff;
+    --button-color: #7f7fd5;
+    --button-border: #7f7fd5;
+    --button-focus: #7f7fd5;
+
+}
+
+body {
+    background: var(--main-bg-color);
+    background: -webkit-linear-gradient(to right, var(--main-bg-color), var(--main-bg-secondary-color), var(--main-bg-third-color));
+    background: linear-gradient(to right, var(--main-bg-color), var(--main-bg-secondary-color), var(--main-bg-third-color));
+    font-family: var(--font-style);
+    color: var(--body-text-color);
+}
+
+.crawler-form {
+    border: 1px solid var(--form-border);
+    padding: 25px 20px;
+}
+
+.form-btn {
+    background: var(--button-color);
+    border: 1px solid var(--button-border);
+}
+
+.form-btn:hover,
+form-btn:active {
+    background: var(--button-focus);
+    border: 1px solid white;
+}
+
+.form-btn:focus {
+    border: 1px solid white;
+    box-shadow: none;
+}
+
+.crawler-form textarea {
+    font-size: 14px;
+}

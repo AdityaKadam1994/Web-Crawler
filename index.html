@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crawler Tool</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h3 class="text-center mt-3 mb-4">SEO Page Crawler</h3>
+      <form class="crawler-form">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1"
+                >Enter Urls to Crawl (Comma Separated)</label
+              >
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="5"
+                name="links"
+              ></textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="">Content To Crawl</label>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="h1"
+                    name="checked_tag[]"
+                  />
+                  <label class="form-check-label" for="defaultCheck1">
+                    H1
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="h2"
+                    name="checked_tag[]"
+                  />
+                  <label class="form-check-label" for="defaultCheck2">
+                    H2
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="h3"
+                    name="checked_tag[]"
+                  />
+                  <label class="form-check-label" for="defaultCheck2">
+                    H3
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="h4"
+                    name="checked_tag[]"
+                  />
+                  <label class="form-check-label" for="defaultCheck2">
+                    H4
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="h5"
+                    name="checked_tag[]"
+                  />
+                  <label class="form-check-label" for="defaultCheck2">
+                    H5
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="h6"
+                    name="checked_tag[]"
+                  />
+                  <label class="form-check-label" for="defaultCheck2">
+                    H6
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="link"
+                    name="checked_tag[]"
+                  />
+                  <label class="form-check-label" for="defaultCheck2">
+                    Canonical Link
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="meta"
+                    name="checked_tag[]"
+                  />
+                  <label class="form-check-label" for="defaultCheck2">
+                    Meta Tags
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="a"
+                    name="checked_tag[]"
+                  />
+                  <label class="form-check-label" for="defaultCheck2">
+                    Anchor Tags
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="img"
+                    name="checked_tag[]"
+                  />
+                  <label class="form-check-label" for="defaultCheck2">
+                    Img Tags
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4 mb-2">
+          <button type="submit" class="btn btn-primary form-btn" id="submit" value="Submit">
+            Submit
+          </button>
+        </div>
+      </form>
+      <!-- <div id="seo-body">
+        <table class="table table-responsive" id="output-data">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+      </div> -->
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./bundle.js"></script>
+  </body>
+</html>
