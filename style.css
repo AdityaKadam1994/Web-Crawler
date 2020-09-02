@@ -43,3 +43,11 @@ form-btn:active {
 .crawler-form textarea {
     font-size: 14px;
 }
+
+#output-table {
+    border: 1px solid #fff;
+}
+
+#output-table td, #output-table th {
+    border-left: 1px solid #fff;
+}
