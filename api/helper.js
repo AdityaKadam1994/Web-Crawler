@@ -7,8 +7,25 @@ async function scrapUrl(url, tags) {
     const response = await axios.get(url);
     const $ = cheerio.load(response.data)
     let scrapData = {};
+    //It will remove circular dependancy
+    function simpleStringify(object) {
+      let simpleObject = {};
+      for (let prop in object) {
+        if (!object.hasOwnProperty(prop)) {
+          continue;
+        }
+        if (typeof (object[prop]) == 'object') {
+          continue;
+        }
+        if (typeof (object[prop]) == 'function') {
+          continue;
+        }
+        simpleObject[prop] = object[prop];
+      }
+      return JSON.stringify(simpleObject); // returns cleaned up JSON
+    };
     // helper method to scrap data by tag and return in array
-    const getTagData = tag => $(tag).text().split(/\n+/g).filter(el => el.trim() !== '').map(e => e.trim());
+    const getTagData = (tag, attr) => JSON.parse(simpleStringify($(tag).map((i, e) => attr ? $(e).attr(`${attr}`) : $(e).text())));
     // Iterate through each tag to collect data
     tags.forEach(tag => {
       if (tag === 'p') {
@@ -40,40 +57,21 @@ async function scrapUrl(url, tags) {
         scrapData[tag] = h6TagDta
       }
       if (tag === 'img') {
-        let imgTagData = $(tag).attr('src')
-        let alt = $(tag).attr('alt')
+        let imgTagData = getTagData(tag, 'src')
+        let alt = getTagData(tag, 'alt')
         scrapData[tag] = imgTagData
         scrapData['alt'] = alt
       }
       if (tag === 'a') {
-        let aTagHref = $(tag).attr('href')
-        console.log(aTagHref)
+        let aTagHref = getTagData(tag, 'href')
         let aTagText = getTagData(tag);
+        scrapData['aLinks'] = aTagHref;
         scrapData[tag] = aTagText
       }
       if (tag === 'meta') {
-        metaKeys = {
-          'description': null,
-          'keywords': null,
-          'author': null,
-          'viewport': null,
-          'og:type': null,
-          'og:title': null,
-          'og:description': null,
-          'og:image': null,
-          'og:url': null,
-          'twitter:title': null,
-          'twitter:image': null,
-          'twitter:description': null,
-          'twitter:site': null,
-          'twitter:creator': null,
-          'twitter:card': null
-        }
-        for (let key in metaKeys) {
-          metaKeys[key] = $(`meta[name='${key}']`).attr('content')
-          metaKeys[key] = $(`meta[property='${key}']`).attr('content')
-        }
-        scrapData[tag] = metaKeys
+        scrapData['metaName'] = getTagData(tag, 'name')
+        scrapData['metaProperty'] = getTagData(tag, 'property')
+        scrapData['metaContent'] = getTagData(tag, 'content')
       }
     })
     // returb scrapedata object as Promise
