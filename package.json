@@ -4,16 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start" : "node api/index.js",
+    "start": "node api/index.js",
     "dev": "nodemon api/index.js"
   },
-  "keywords": ["seo","keywords","tags"],
+  "keywords": [
+    "seo",
+    "keywords",
+    "tags"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.20.0",
     "browserify": "^16.5.2",
-    "cheerio": "^1.0.0-rc.3"
+    "cheerio": "^1.0.0-rc.3",
+    "vue": "^2.6.12"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
