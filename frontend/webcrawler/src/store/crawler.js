@@ -17,7 +17,7 @@ export const crawler = {
         tags: ['h2', 'h3', 'h4']
       }
 
-      axios.post('https://web-crawler-plum.vercel.app/api', dataToSend).then(res => {
+      axios.post('https://cors-anywhere.herokuapp.com/https://web-crawler-plum.vercel.app/api', dataToSend).then(res => {
         const response = res.data
         commit('SCRAPPEDDATA', response)
         console.log(response)

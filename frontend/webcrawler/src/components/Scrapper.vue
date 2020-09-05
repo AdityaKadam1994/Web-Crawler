@@ -1,14 +1,22 @@
 <template>
   <div class="scrapper">
     <h1>Scrapper</h1>
-    <div class="row">
-      <table class="table table-responsive">
-        <thead>
-          <tr>
-            {{returnedScrapData}}
-          </tr>
-        </thead>
-      </table>
+    <div class="container-fluid">
+      <div class="row">
+        {{returnedScrapData}}
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th v-for="header in headers" :key="header">{{header}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr v-for="(item, index) in items" :key="index">
+              <td>{{item.h2}}</td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -40,7 +48,19 @@ export default {
   },
   methods: {
     formatTableData (data) {
-      console.log(data)
+      const headers = []
+      const items = []
+      data.map(head => {
+        Object.keys(head.scrapData).forEach(item => {
+          headers.push(item)
+        })
+        return items.push(Object.assign({}, JSON.parse(head.scrapData)))
+      })
+      headers.push('url')
+      this.headers = headers
+      this.items = items
+      console.log(headers)
+      console.log(items)
     }
   },
   created () {
