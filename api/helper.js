@@ -9,7 +9,7 @@ async function scrapUrl(url, tags) {
     let scrapData = {};
     //It will remove circular dependancy
     function simpleStringify(object) {
-      let simpleObject = {};
+      let simpleObject = [];
       for (let prop in object) {
         if (!object.hasOwnProperty(prop)) {
           continue;
@@ -20,9 +20,9 @@ async function scrapUrl(url, tags) {
         if (typeof (object[prop]) == 'function') {
           continue;
         }
-        simpleObject[prop] = object[prop];
+        simpleObject.push(object[prop]);
       }
-      return JSON.stringify(simpleObject); // returns cleaned up JSON
+      return JSON.stringify(simpleObject.slice(0, -1)); // returns cleaned up JSON
     };
     // helper method to scrap data by tag and return in array
     const getTagData = (tag, attr) => JSON.parse(simpleStringify($(tag).map((i, e) => attr ? $(e).attr(`${attr}`) : $(e).text())));
@@ -74,7 +74,7 @@ async function scrapUrl(url, tags) {
         scrapData['metaContent'] = getTagData(tag, 'content')
       }
     })
-    // returb scrapedata object as Promise
+    // return scrapedata object as Promise
     return new Promise((resolve, reject) => {
       if (Object.keys(scrapData).length === 0 && scrapData.constructor === Object) {
         reject('Scrape data not found')

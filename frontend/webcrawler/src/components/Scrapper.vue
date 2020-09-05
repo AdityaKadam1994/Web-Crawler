@@ -40,17 +40,7 @@ export default {
   },
   methods: {
     formatTableData (data) {
-      const formattedHeaders = data.map((header, index) => {
-        const headerArray = []
-        Object.values(header).forEach(item => {
-          // header.push[item]
-          // console.log(item)
-          headerArray.push(item)
-          headerArray.push(Object.keys(item))
-        })
-        return headerArray
-      })
-      console.log(formattedHeaders)
+      console.log(data)
     }
   },
   created () {
